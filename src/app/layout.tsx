@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SiteFooter } from "@/components/SiteFooter";
+import { getAllStates } from "@/lib/states";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -37,6 +39,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const stateLinks = getAllStates().map((s) => ({
+    href: `/${s.slug}`,
+    label: `${s.name} Mortgage Calculator`,
+  }));
   return (
     <html
       lang="en"
@@ -44,6 +50,7 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-zinc-50 text-zinc-900 font-sans">
         {children}
+        <SiteFooter stateLinks={stateLinks} />
         <Analytics />
       </body>
     </html>
