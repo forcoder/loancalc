@@ -10,6 +10,7 @@ const TOOL_PAGES = [
   { path: "/fha-loan-calculator", priority: 0.85 },
   { path: "/pmi-calculator", priority: 0.85 },
   { path: "/15-vs-30-year-mortgage", priority: 0.85 },
+  { path: "/compound-interest-calculator", priority: 0.85 },
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -12,6 +12,7 @@ const TOOL_LINKS: SiteLink[] = [
   { href: "/fha-loan-calculator", label: "FHA Loan Calculator" },
   { href: "/pmi-calculator", label: "PMI Calculator" },
   { href: "/15-vs-30-year-mortgage", label: "15 vs 30 Year Mortgage" },
+  { href: "/compound-interest-calculator", label: "Compound Interest Calculator" },
 ];
 
 interface NavSectionProps {
