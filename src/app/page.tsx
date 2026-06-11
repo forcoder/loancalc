@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { MortgageCalculator } from "@/components/MortgageCalculator";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://loancalc.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://loancalc-eta.vercel.app";
 
 export const metadata: Metadata = {
   title: {

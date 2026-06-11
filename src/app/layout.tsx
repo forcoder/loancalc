@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://loancalc.app"),
+  metadataBase: new URL("https://loancalc-eta.vercel.app"),
   title: {
     default: "LoanCalc — Free Mortgage & Loan Calculator",
     template: "%s | LoanCalc",
@@ -43,6 +44,7 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-zinc-50 text-zinc-900 font-sans">
         {children}
+        <Analytics />
       </body>
     </html>
   );

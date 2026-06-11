@@ -5,7 +5,7 @@ import { MortgageCalculator } from "@/components/MortgageCalculator";
 import { getAllStateSlugs, getStateBySlug, type StateFaq } from "@/lib/states";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://loancalc.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://loancalc-eta.vercel.app";
 
 interface PageProps {
   params: Promise<{ state: string }>;
