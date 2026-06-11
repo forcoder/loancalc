@@ -42,3 +42,6 @@ next-env.d.ts
 
 # claude
 .claude/
+
+# daily-build logs (ephemeral, not history)
+daily-builds/*.log
