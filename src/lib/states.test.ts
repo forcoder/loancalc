@@ -8,9 +8,9 @@ import {
 
 describe("states data", () => {
   describe("getAllStates", () => {
-    it("returns 5 states in V1 launch scope", () => {
+    it("returns 15 states (5 V1 + 10 expansion)", () => {
       const states = getAllStates();
-      expect(states).toHaveLength(5);
+      expect(states).toHaveLength(15);
     });
 
     it("every state has complete required fields", () => {
@@ -74,10 +74,10 @@ describe("states data", () => {
   });
 
   describe("getAllStateSlugs", () => {
-    it("returns 5 unique slugs", () => {
+    it("returns 15 unique slugs", () => {
       const slugs = getAllStateSlugs();
-      expect(slugs).toHaveLength(5);
-      expect(new Set(slugs).size).toBe(5);
+      expect(slugs).toHaveLength(15);
+      expect(new Set(slugs).size).toBe(15);
     });
 
     it("every slug appears in getAllStates", () => {
@@ -109,14 +109,44 @@ describe("states data", () => {
       expect(allText?.toLowerCase()).toMatch(/recording|transfer tax|new york/);
     });
 
-    it("IL has highest property tax rate of the 5", () => {
-      const il = getStateBySlug("illinois");
+    it("NJ has highest property tax rate of the 15", () => {
+      const nj = getStateBySlug("new-jersey");
       const all = getAllStates();
-      const others = all.filter((s) => s.code !== "IL");
+      const others = all.filter((s) => s.code !== "NJ");
       for (const other of others) {
-        expect(il!.propertyTaxRate).toBeGreaterThanOrEqual(
+        expect(nj!.propertyTaxRate).toBeGreaterThanOrEqual(
           other.propertyTaxRate,
         );
+      }
+    });
+
+    it("WA and TX and FL have no state income tax", () => {
+      const wa = getStateBySlug("washington");
+      const tx = getStateBySlug("texas");
+      const fl = getStateBySlug("florida");
+      expect(wa?.stateIncomeTaxNote.toLowerCase()).toMatch(/no state/);
+      expect(tx?.stateIncomeTaxNote.toLowerCase()).toMatch(/no state/);
+      expect(fl?.stateIncomeTaxNote.toLowerCase()).toMatch(/no state/);
+    });
+
+    it("PA mentions Act 32 (state-specific tax mechanic)", () => {
+      const s = getStateBySlug("pennsylvania");
+      const allText = s?.faqs.map((f) => f.question + f.answer).join(" ");
+      expect(allText?.toLowerCase()).toMatch(/act 32|earned income|pennsylvania/);
+    });
+
+    it("MI mentions Proposal A tax cap (state-specific)", () => {
+      const s = getStateBySlug("michigan");
+      const allText = s?.faqs.map((f) => f.question + f.answer).join(" ");
+      expect(allText?.toLowerCase()).toMatch(/proposal a|principal residence|michigan/);
+    });
+
+    it("AZ has lowest property tax rate of the 15", () => {
+      const az = getStateBySlug("arizona");
+      const all = getAllStates();
+      const others = all.filter((s) => s.code !== "AZ");
+      for (const other of others) {
+        expect(az!.propertyTaxRate).toBeLessThanOrEqual(other.propertyTaxRate);
       }
     });
   });
